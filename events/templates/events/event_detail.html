@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<hr/>
+
+<p>{{ object.startdate }}</p>
+<h1><a href={{ object.get_absolute_url }}>{{ object.abstract }}</a></h1>
+<p>{{ object.body }}</p>
+<p></p>
+<p></p>
+<hr/>
+
+
+{% endblock %}
