@@ -1,5 +1,4 @@
-# -*- utf-8 -*-
-
+# -*- coding:utf-8 -*-
 from django.conf.urls.defaults import *
 from djapps.events.models import Event, EventCategory
 from datetime import date
@@ -19,10 +18,10 @@ urlpatterns = patterns('django.views.generic.date_based',
 
 urlpatterns = urlpatterns + patterns('djapps.events.views',
     # <year>/<month>/tags/<tags>/
-    (r'^(?P<year>\d{4})/(?P<month>\d{2})/tags/(?P<tags>[-_a-zA-Z]+)/$',
+    (r'^(?P<year>\d{4})/(?P<month>\d{2})/tags/(?P<tags>[a-zA-Z_\-]+)/$',
         'custom_archive_month', month_dict),
     # <year>/<month>/<category>/
-    (r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<category>[a-zA-Z]+)/$', 
+    (r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<category>[-_a-zA-Z_\-]+)/$', 
         'custom_archive_month', month_dict),
     # <year>/<month>/<category>/<tags>/
     #

@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 from django.views.generic.date_based import archive_month
 from django.http import HttpResponseRedirect
 from djapps.events.models import EventCategory
@@ -67,7 +68,7 @@ def custom_archive_month (request, year, month, queryset, date_field, **kwargs):
         # Handling categories: preserve in context and filter objects.
         categ = kwargs.pop('category')
         context['category'] = categ
-        queryset = queryset.filter(category__name=categ)
+        queryset = queryset.filter(category__permalink=categ)
     else:
         context['category'] = None
     
@@ -75,7 +76,7 @@ def custom_archive_month (request, year, month, queryset, date_field, **kwargs):
         # Handling tags: preserve in context and filter objects.
         tags = kwargs.pop('tags')
         context['tags'] = tags
-        queryset = queryset.filter (tags__value=tags)
+        queryset = queryset.filter (tags__norm_value=tags)
     else:
         context['tags'] = None
     
