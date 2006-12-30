@@ -3,9 +3,9 @@
 {% block extrahead %}{{ block.super }}
 <script type="text/javascript" src="../../../jsi18n/"></script>
 {% for js in javascript_imports %}{% include_admin_script js %}{% endfor %}
-<script type="text/javascript" src="/media/js/jquery.pack.js"></script>
-<script type="text/javascript" src="/media/js/farbtastic.js"></script>
-<script type="text/javascript" src="/media/js/colorpicker.js"></script>
+<script type="text/javascript" src="{{ media_url }}js/jquery.pack.js"></script>
+<script type="text/javascript" src="{{ media_url }}js/farbtastic.js"></script>
+<script type="text/javascript" src="{{ media_url }}js/colorpicker.js"></script>
 {% endblock %}
 {% block stylesheet %}{% admin_media_prefix %}css/forms.css{% endblock %}
 {% block extrastyle %}{{ block.super }}
