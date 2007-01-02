@@ -1,7 +1,6 @@
 # -*- coding:utf-8 -*-
 from django.conf.urls.defaults import *
 from djapps.events.models import Event, EventCategory
-from datetime import date
 
 day_dict = {
     'date_field': 'startdate',
