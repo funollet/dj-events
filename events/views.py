@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 from django.views.generic.date_based import archive_month
 from django.http import HttpResponseRedirect
-from djapps.events.models import EventCategory
+from events.models import EventCategory
 from datetime import date, timedelta
 from time import strptime
 

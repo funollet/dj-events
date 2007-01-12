@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 from django.conf.urls.defaults import *
-from djapps.events.models import Event, EventCategory
+from events.models import Event, EventCategory
 
 day_dict = {
     'date_field': 'startdate',
@@ -15,7 +15,7 @@ urlpatterns = patterns('django.views.generic.date_based',
         'object_detail', day_dict),
 )
 
-urlpatterns = urlpatterns + patterns('djapps.events.views',
+urlpatterns = urlpatterns + patterns('events.views',
     # <year>/<month>/tag/<tags>/
     (r'^(?P<year>\d{4})/(?P<month>\d{2})/tag/(?P<tags>[a-zA-Z_\-]+)/$',
         'custom_archive_month', month_dict),

@@ -2,9 +2,9 @@
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from djapps.misc.markup import markup_help, parse_markup
-from djapps.tags.models import Tag
-from djapps.tags import fields
+from misc.markup import markup_help, parse_markup
+from tags.models import Tag
+from tags import fields
 
 
 
