@@ -51,7 +51,6 @@ class EventCategory (models.Model):
             (_('Advanced'), {'fields': ('permalink', 'icon',), 'classes': 'collapse'})
             )
         list_display = ('name', 'priority',)
-        #js = ('/js/jquery.pack.js', '/js/farbtastic.js', '/js/colorpicker.js',)
     
     def __str__ (self):
         return self.name
