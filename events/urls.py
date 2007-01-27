@@ -20,7 +20,7 @@ urlpatterns = urlpatterns + patterns('events.views',
     (r'^(?P<year>\d{4})/(?P<month>\d{2})/tag/(?P<tags>[a-zA-Z_\-]+)/$',
         'custom_archive_month', month_dict),
     # <year>/<month>/<category>/
-    (r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<category>[-_a-zA-Z_\-]+)/$', 
+    (r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<category>[a-zA-Z_\-]+)/$', 
         'custom_archive_month', month_dict),
     # <year>/<month>/<category>/<tags>/
     #
