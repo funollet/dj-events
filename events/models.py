@@ -13,7 +13,7 @@ class EventCategory (models.Model):
     """
     name = models.CharField (_('name'), maxlength=200, )
     
-    permalink = models.SlugField (_('permalink'),
+    easyname = models.SlugField (_('easyname'),
         prepopulate_from = ('name',),
         unique = True,
         help_text = _('Easy-to-link name (good, if short, twice good).')
@@ -48,7 +48,7 @@ class EventCategory (models.Model):
     class Admin:
         fields = (
             (None, {'fields': (('name', 'priority',), 'color',)}),
-            (_('Advanced'), {'fields': ('permalink', 'icon',), 'classes': 'collapse'})
+            (_('Advanced'), {'fields': ('easyname', 'icon',), 'classes': 'collapse'})
             )
         list_display = ('name', 'priority',)
     
@@ -69,7 +69,7 @@ class Event (models.Model):
         help_text = markup_help['docutils'],
     )
 
-    permalink = models.SlugField (_('permalink'),
+    easyname = models.SlugField (_('easyname'),
         prepopulate_from = ('abstract',),
         unique = True,
         help_text = _('Easy-to-link name (good, if short, twice good).'),

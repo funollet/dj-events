@@ -41,7 +41,9 @@
             </td>
         
         {% else %}
-            <td class="free-day"><div class="day-number">{{ day.0 }}</div></td>
+            <td class="free-day">{% ifnotequal day.0 0 %}
+            <div class="day-number">{{ day.0 }}</div>
+            {% endifnotequal %}</td>
         {% endif %}
         
     {% endfor %}

@@ -15,7 +15,7 @@ def _make_categories_list (request):
     # Insert one link to every category.
     categories_links = [ {
         'name': ec.name, 
-        'url': '/'.join( categ_url[:4] + ['%s', ''] ) % ec.permalink, 
+        'url': '/'.join( categ_url[:4] + ['%s', ''] ) % ec.easyname, 
     } for ec in EventCategory.objects.all() ]
     # Prepend a link for "no-category".
     categories_links.insert(0, {
@@ -68,7 +68,7 @@ def custom_archive_month (request, year, month, queryset, date_field, **kwargs):
         # Handling categories: preserve in context and filter objects.
         categ = kwargs.pop('category')
         context['category'] = categ
-        queryset = queryset.filter(category__permalink=categ)
+        queryset = queryset.filter(category__easyname=categ)
     else:
         context['category'] = None
     
