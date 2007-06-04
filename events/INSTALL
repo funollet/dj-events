@@ -1,0 +1,22 @@
+Requirements:
+
+ * misc/markup.py
+ * tags
+ * colorpicker (jQuery)
+
+
+Add to your 'settings.py'::
+    
+    INSTALLED_APPS = (
+        'events',
+    )
+    
+    ABSOLUTE_URL_OVERRIDES = {
+        'events.event': lambda o: '/events/%s/%s/' % (o.startdate.strftime('%Y/%m/%d').lower(), o.id) ,
+    }
+    
+    # Skip <h1>, I'll use on titles
+    RESTRUCTUREDTEXT_FILTER_SETTINGS = {'initial_header_level': 2 }
+    
+    # Tags application.
+    STYLE_URL = MEDIA_URL + 'tags/'
