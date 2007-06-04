@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load events_tags %}
 
+{% block style %}{{ block.super }}
+<link href="{{ media_url }}css/events.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
 {% block content %}
 <div class="events">
 
@@ -29,7 +33,7 @@
     {% for day in week %}
         
         {% if day.1.0 %}
-            <td class="busy-day">
+            <td class="busy-day"><div class="day-container">
                 <div class="day-number">{{ day.0 }}</div>
                 <ul class="day-abstract">
                 {% for object in day.1 %}
@@ -38,12 +42,14 @@
                     </li>
                 {% endfor %}
                 </ul>
-            </td>
+            </div></td>
         
         {% else %}
-            <td class="free-day">{% ifnotequal day.0 0 %}
-            <div class="day-number">{{ day.0 }}</div>
-            {% endifnotequal %}</td>
+            <td class="free-day"><div class="day-container">
+                {% ifnotequal day.0 0 %}
+                <div class="day-number">{{ day.0 }}</div>
+                {% endifnotequal %}
+            </div></td>
         {% endif %}
         
     {% endfor %}

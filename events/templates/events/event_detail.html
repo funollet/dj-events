@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block style %}{{ block.super }}
+<link href="{{ media_url }}css/events.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
 {% block content %}
 
 <hr/>
