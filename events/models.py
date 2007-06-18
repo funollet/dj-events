@@ -3,9 +3,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from misc.markup import markup_help, parse_markup
-from tags.models import Tag
-from tags import fields
-
+from tagging.fields import TagField
 
 
 class EventCategory (models.Model):
@@ -77,9 +75,7 @@ class Event (models.Model):
     category = models.ForeignKey (EventCategory,
         verbose_name=_('category'),
     )
-    tags = fields.TagsField(Tag,
-        blank = True,
-    )
+    tags = TagField()
 
 
     class Meta:

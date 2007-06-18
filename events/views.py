@@ -1,9 +1,10 @@
 # -*- coding:utf-8 -*-
 from django.views.generic.date_based import archive_month
 from django.http import HttpResponseRedirect
-from events.models import EventCategory
+from events.models import Event,EventCategory
 from datetime import date, timedelta
 from time import strptime
+from tagging.models import Tag,TaggedItem
 
 ### Utility functions.
 
@@ -64,6 +65,17 @@ def custom_archive_month (request, year, month, queryset, date_field, **kwargs):
     # Local list for calculated info. Will be added to 'extra_context'.
     context = {}
     
+    # We need to start with a new "queryset" to do tag-based filter.
+    # So, any previous selection on the queryset will be lost.
+    if kwargs.has_key('tags'):
+        # Handling tags: preserve in context and filter objects.
+        tags = kwargs.pop('tags')
+        context['tags'] = tags
+        requested_tag = Tag.objects.filter(name=tags)
+        queryset = TaggedItem.objects.get_by_model (Event, requested_tag)
+    else:
+        context['tags'] = None
+    
     if kwargs.has_key('category'):
         # Handling categories: preserve in context and filter objects.
         categ = kwargs.pop('category')
@@ -71,14 +83,6 @@ def custom_archive_month (request, year, month, queryset, date_field, **kwargs):
         queryset = queryset.filter(category__easyname=categ)
     else:
         context['category'] = None
-    
-    if kwargs.has_key('tags'):
-        # Handling tags: preserve in context and filter objects.
-        tags = kwargs.pop('tags')
-        context['tags'] = tags
-        queryset = queryset.filter (tags__norm_value=tags)
-    else:
-        context['tags'] = None
     
     context['previous_month_url'], context['next_month_url'] = _month_nav_urls (request)
     context['categories_list'] = _make_categories_list(request)
