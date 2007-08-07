@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+from django.utils.encoding import smart_unicode
 from django.views.generic.date_based import archive_month
 from django.http import HttpResponseRedirect
 from events.models import Event,EventCategory
@@ -16,7 +17,7 @@ def _make_categories_list (request):
     # Insert one link to every category.
     categories_links = [ {
         'name': ec.name, 
-        'url': '/'.join( categ_url[:4] + ['%s', ''] ) % ec.easyname, 
+        'url': '/'.join( categ_url[:4] + [u'%s', ''] ) % ec.easyname, 
     } for ec in EventCategory.objects.all() ]
     # Prepend a link for "no-category".
     categories_links.insert(0, {
@@ -35,8 +36,8 @@ def _month_nav_urls (request):
     year = month_url[2]
     month = month_url[3]
     # Mask year and month on the url.
-    month_url[2] = '%s'
-    month_url[3] = '%s'
+    month_url[2] = u'%s'
+    month_url[3] = u'%s'
     
     # Previous-next month tricky maths.
     date_tuple = strptime( year+month, '%Y%m')[:3]
@@ -51,7 +52,7 @@ def _month_nav_urls (request):
     prev_next[1] = last_day + timedelta(days=1)
     
     # Giving format. Months must be 2-chars-wide.
-    prev_next_str = [ ( str(d.year), str(d.month).rjust(2,'0') )  for d in prev_next ]
+    prev_next_str = [ ( smart_unicode(d.year), smart_unicode(d.month).rjust(2,'0') )  for d in prev_next ]
     prev_next_url = [ '/'.join(month_url) % tpl for tpl in prev_next_str ]
     
     return prev_next_url

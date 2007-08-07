@@ -12,7 +12,7 @@ Add to your 'settings.py'::
     )
     
     ABSOLUTE_URL_OVERRIDES = {
-        'events.event': lambda o: '/events/%s/%s/' % (o.startdate.strftime('%Y/%m/%d').lower(), o.id) ,
+        'events.event': lambda o: u'/events/%s/%s/' % (o.startdate.strftime(u'%Y/%m/%d').lower(), o.id) ,
     }
     
     # Skip <h1>, I'll use on titles

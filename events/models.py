@@ -50,7 +50,7 @@ class EventCategory (models.Model):
             )
         list_display = ('name', 'priority',)
     
-    def __str__ (self):
+    def __unicode__ (self):
         return self.name
 
 
@@ -89,7 +89,7 @@ class Event (models.Model):
         search_fields = ('abstract',)
 
         
-    def __str__ (self):
+    def __unicode__ (self):
         return self.abstract
     
     def get_absolute_url (self):
