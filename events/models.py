@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.db import models
+from django.db import models, connection
 from django.utils.translation import gettext_lazy as _
 from misc.markup import markup_help, parse_markup
 from tagging.fields import TagField
@@ -9,6 +9,18 @@ from tagging.fields import TagField
 class EventCategory (models.Model):
     """Single-level category system with ordering, color and icon.
     """
+    
+    def priority_default (increment=10):
+        """Returns next suitable value for 'priority' field."""
+        cursor = connection.cursor()
+        cursor.execute("SELECT MAX(priority) FROM events_eventcategory ;")
+        row = cursor.fetchone()
+        try:
+            return row[0] + increment
+        except:
+            return increment
+    
+    
     name = models.CharField (_('name'), maxlength=200, )
     
     easyname = models.SlugField (_('easyname'),
@@ -18,7 +30,8 @@ class EventCategory (models.Model):
     )
     priority = models.PositiveIntegerField (_('priority'),
         unique = True,
-        help_text = _('Categories will be sorted by this field.')
+        help_text = _('Categories will be sorted by this field.'),
+        default = priority_default,
     )
     color = models.CharField (_('color'),
         maxlength = 10,
@@ -45,8 +58,8 @@ class EventCategory (models.Model):
     
     class Admin:
         fields = (
-            (None, {'fields': (('name', 'priority',), 'color',)}),
-            (_('Advanced'), {'fields': ('easyname', 'icon',), 'classes': 'collapse'})
+            (None, {'fields': ('name', 'color',)}),
+            (_('Advanced'), {'fields': ('easyname', 'priority', 'icon',), 'classes': 'collapse'})
             )
         list_display = ('name', 'priority',)
     
