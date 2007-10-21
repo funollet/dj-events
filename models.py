@@ -2,7 +2,7 @@
 
 from django.db import models, connection
 from django.utils.translation import gettext_lazy as _
-from misc.markup import markup_help, parse_markup
+from misc.markup import markup_help
 from tagging.fields import TagField
 
 
@@ -74,10 +74,9 @@ class Event (models.Model):
     abstract = models.CharField (_('abstract'), maxlength=200,
         help_text = _('Short text describing the event.'),
     )
-    body = models.TextField (_('body_html'), editable=False,)
-    body_markup = models.TextField (_('body'), 
+    body = models.TextField (_('body'),
         blank = True,
-        help_text = markup_help['docutils'],
+        help_text = markup_help['markdown'],
     )
 
     easyname = models.SlugField (_('easyname'),
@@ -107,7 +106,3 @@ class Event (models.Model):
     
     def get_absolute_url (self):
         pass
-
-    def save (self):
-        parse_markup (self)
-        super(Event, self).save()

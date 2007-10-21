@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load markup %}
 
 {% block style %}{{ block.super }}
 <link href="{{ MEDIA_URL }}css/events.css" rel="stylesheet" type="text/css" />
@@ -10,7 +11,7 @@
 
 <p>{{ object.startdate }}</p>
 <h1><a href={{ object.get_absolute_url }}>{{ object.abstract }}</a></h1>
-<p>{{ object.body }}</p>
+<p>{{ object.body|markdown }}</p>
 <p></p>
 <p></p>
 <hr/>
