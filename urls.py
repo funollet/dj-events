@@ -15,7 +15,10 @@ urlpatterns = patterns('django.views.generic.date_based',
         'object_detail', day_dict),
 )
 
+
 urlpatterns = urlpatterns + patterns('events.views',
+    (r'^preview/$', 'preview',),
+    #
     # <year>/<month>/tags/<tags>/
     (r'^(?P<year>\d{4})/(?P<month>\d{2})/tags/(?P<tags>[a-zA-Z_\-]+)/$',
         'custom_archive_month', month_dict),

@@ -1,0 +1,58 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.pack.js"></script>
+<script type="text/javascript">
+// Requires jquery.js
+
+function append_to_preview (xml) {
+    $("#preview-content").append(xml)
+    return false
+}
+
+function show_preview () {
+    var body = $("[@name=body]").val()
+    
+    $("#preview-content").html('')
+    $("#preview").show("slow")
+    
+    $.post("/preview/", {"markup": body}, append_to_preview)
+    return false
+}
+
+function hide_preview () {
+    $("#preview").hide("slow")
+    return false
+}
+
+$(document).ready( function(){
+    $("a#button-preview").toggle(show_preview, hide_preview)
+})
+</script>
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}
+<style rel="stylesheet" type="text/css">
+#preview {
+    display: none ;
+    margin: 1em 0; 
+    background-color: #D6D9F7 ;
+}
+#preview-content {
+    border: 1px solid gray;
+}
+</style>
+{% endblock %}
+
+
+{% block object-tools %}
+{% if change %}{% if not is_popup %}
+  <ul class="object-tools">
+  <li><a id="button-preview" href="">{% trans "Preview" %}</a></li>
+  <li><a href="history/" class="historylink">{% trans "History" %}</a></li>
+  {% if has_absolute_url %}<li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="viewsitelink">{% trans "View on site" %}</a></li>{% endif%}
+  </ul>
+{% endif %}{% endif %}
+<div id="preview"><div id="preview-content"></div></div>
+{% endblock %}
