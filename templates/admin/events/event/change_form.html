@@ -17,7 +17,7 @@ function show_preview () {
     $("#preview-content").html('')
     $("#preview").show("slow")
     
-    $.post("/preview/", {"markup": body}, append_to_preview)
+    $.post("/events/preview/", {"markup": body}, append_to_preview)
     return false
 }
 
