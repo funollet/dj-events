@@ -38,7 +38,7 @@ class EventCategory (models.Model):
             return increment
     
     
-    name = models.CharField (_('name'), maxlength=200, )
+    name = models.CharField (_('name'), max_length=200, )
     
     easyname = models.SlugField (_('easyname'),
         prepopulate_from = ('name',),
@@ -51,7 +51,7 @@ class EventCategory (models.Model):
         default = priority_default,
     )
     color = models.CharField (_('color'),
-        maxlength = 10,
+        max_length = 10,
         default = '#000000',
         # Farbtastic colorpicker looks for this div.
         help_text = _('''<div id="picker"></div>'''),
@@ -88,7 +88,7 @@ class EventCategory (models.Model):
 class Event (models.Model):
     
     startdate = models.DateTimeField (_('start day and hour'), )
-    abstract = models.CharField (_('abstract'), maxlength=200,
+    abstract = models.CharField (_('abstract'), max_length=200,
         help_text = _('Short text describing the event.'),
     )
     body = models.TextField (_('body'),
